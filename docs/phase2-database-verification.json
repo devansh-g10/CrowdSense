@@ -1,0 +1,797 @@
+{
+  "tables": {
+    "calendar": {
+      "schema": [
+        {
+          "column_name": "service_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "monday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "tuesday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "wednesday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "thursday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "friday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "saturday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "sunday",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "start_date",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "end_date",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 1,
+      "distinct_keys": 1,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "service_id": 0,
+        "monday": 0,
+        "tuesday": 0,
+        "wednesday": 0,
+        "thursday": 0,
+        "friday": 0,
+        "saturday": 0,
+        "sunday": 0,
+        "start_date": 0,
+        "end_date": 0
+      },
+      "blank_strings": {
+        "service_id": 0,
+        "monday": 0,
+        "tuesday": 0,
+        "wednesday": 0,
+        "thursday": 0,
+        "friday": 0,
+        "saturday": 0,
+        "sunday": 0,
+        "start_date": 0,
+        "end_date": 0
+      },
+      "sha256": "3ec2f1b1631072a829db9741c3bd59f3c279dda0811c17b2f8ef87068bd9c298"
+    },
+    "stops": {
+      "schema": [
+        {
+          "column_name": "stop_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_name",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_key",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "latitude",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "longitude",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 6862,
+      "distinct_keys": 6862,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "stop_id": 0,
+        "stop_name": 0,
+        "stop_key": 0,
+        "latitude": 0,
+        "longitude": 0
+      },
+      "blank_strings": {
+        "stop_id": 0,
+        "stop_name": 0,
+        "stop_key": 0
+      },
+      "sha256": "8bcf5f42078b339439aec425536711834d555055f5cac27e701de97e8947995e"
+    },
+    "routes": {
+      "schema": [
+        {
+          "column_name": "agency_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_long_name",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_short_name",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_desc",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_type",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 2574,
+      "distinct_keys": 2574,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "agency_id": 0,
+        "route_id": 0,
+        "route_long_name": 0,
+        "route_short_name": 0,
+        "route_desc": 0,
+        "route_type": 0
+      },
+      "blank_strings": {
+        "agency_id": 0,
+        "route_id": 0,
+        "route_long_name": 0,
+        "route_short_name": 0,
+        "route_desc": 0,
+        "route_type": 0
+      },
+      "sha256": "ec02b8c2359165d4df5428b56e46fa5ceb2e94a47efecd684f459c9ff708d383"
+    },
+    "route_lookup": {
+      "schema": [
+        {
+          "column_name": "ticket_route",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 1980,
+      "distinct_keys": 1980,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "ticket_route": 0,
+        "route_id": 0
+      },
+      "blank_strings": {
+        "ticket_route": 0,
+        "route_id": 0
+      },
+      "sha256": "615a8efb63a3363e7ac91d76d13f448de492874367a42ae83ba3e66cd4637996"
+    },
+    "route_stop_sequence": {
+      "schema": [
+        {
+          "column_name": "pattern_id",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_name",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_key",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_sequence",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "latitude",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "longitude",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 109660,
+      "distinct_keys": 109660,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "pattern_id": 0,
+        "route_id": 0,
+        "stop_id": 0,
+        "stop_name": 0,
+        "stop_key": 0,
+        "stop_sequence": 0,
+        "latitude": 0,
+        "longitude": 0
+      },
+      "blank_strings": {
+        "route_id": 0,
+        "stop_id": 0,
+        "stop_name": 0,
+        "stop_key": 0
+      },
+      "sha256": "6d0350ba6b5ccb25bc08c961135b55941ecdc94284d06c4062facdcf5680578f"
+    },
+    "trip_schedule": {
+      "schema": [
+        {
+          "column_name": "pattern_id",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "trip_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "service_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_sequence",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "departure_seconds",
+          "column_type": "INTEGER",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 2737136,
+      "distinct_keys": 2737136,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "pattern_id": 0,
+        "route_id": 0,
+        "trip_id": 0,
+        "service_id": 0,
+        "stop_id": 0,
+        "stop_sequence": 0,
+        "departure_seconds": 0
+      },
+      "blank_strings": {
+        "route_id": 0,
+        "trip_id": 0,
+        "service_id": 0,
+        "stop_id": 0
+      },
+      "sha256": "ac52cf8ec3581e80586f892eba92aec0eab4b4ca82d40de00874a3e3dee8d41d"
+    },
+    "crowding_model": {
+      "schema": [
+        {
+          "column_name": "route_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "pattern_id",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "stop_sequence",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "from_stop_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "to_stop_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "is_weekend",
+          "column_type": "BOOLEAN",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "time_slot",
+          "column_type": "INTEGER",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "baseline_prediction",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "predicted_load",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "prediction_source",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "sample_journeys",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "observed_days",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "peak_load_p90",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "lower_threshold",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "upper_threshold",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "reference_samples",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "data_support",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "crowding_level",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 1063956,
+      "distinct_keys": 1063956,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "route_id": 0,
+        "pattern_id": 0,
+        "stop_sequence": 0,
+        "from_stop_id": 0,
+        "to_stop_id": 0,
+        "is_weekend": 0,
+        "time_slot": 0,
+        "baseline_prediction": 381153,
+        "predicted_load": 0,
+        "prediction_source": 0,
+        "sample_journeys": 0,
+        "observed_days": 0,
+        "peak_load_p90": 0,
+        "lower_threshold": 0,
+        "upper_threshold": 0,
+        "reference_samples": 0,
+        "data_support": 0,
+        "crowding_level": 0
+      },
+      "blank_strings": {
+        "route_id": 0,
+        "from_stop_id": 0,
+        "to_stop_id": 0,
+        "prediction_source": 0,
+        "data_support": 0,
+        "crowding_level": 0
+      },
+      "sha256": "b5259f51f83a9f7cc234422566e3666044e94ff598ebfe3e55196a84b6196c94"
+    },
+    "route_analytics": {
+      "schema": [
+        {
+          "column_name": "route_id",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "route_name",
+          "column_type": "VARCHAR",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "is_weekend",
+          "column_type": "BOOLEAN",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "time_slot",
+          "column_type": "INTEGER",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "segment_profiles",
+          "column_type": "BIGINT",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "average_recorded_load",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "maximum_recorded_load",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "low_crowding_segments",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "moderate_crowding_segments",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "high_crowding_segments",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        },
+        {
+          "column_name": "insufficient_data_segments",
+          "column_type": "DOUBLE",
+          "null": "YES",
+          "key": null,
+          "default": null,
+          "extra": null
+        }
+      ],
+      "rows": 50318,
+      "distinct_keys": 50318,
+      "duplicate_key_rows": 0,
+      "nulls": {
+        "route_id": 0,
+        "route_name": 0,
+        "is_weekend": 0,
+        "time_slot": 0,
+        "segment_profiles": 0,
+        "average_recorded_load": 0,
+        "maximum_recorded_load": 0,
+        "low_crowding_segments": 0,
+        "moderate_crowding_segments": 0,
+        "high_crowding_segments": 0,
+        "insufficient_data_segments": 0
+      },
+      "blank_strings": {
+        "route_id": 0,
+        "route_name": 0
+      },
+      "sha256": "ab95e368b0d5351bd54fb07188bc3e14db0d5e5de536041213506579ffc761ea"
+    }
+  },
+  "relationships": {
+    "pattern_route_missing": 0,
+    "pattern_stop_missing": 0,
+    "lookup_route_missing": 0,
+    "schedule_route_missing": 0,
+    "schedule_stop_missing": 0,
+    "schedule_service_missing": 0,
+    "schedule_pattern_stop_missing": 0,
+    "model_route_missing": 0,
+    "model_from_stop_missing": 0,
+    "model_to_stop_missing": 0,
+    "model_pattern_segment_missing": 0,
+    "analytics_route_missing": 0,
+    "analytics_model_group_missing": 0,
+    "model_analytics_group_missing": 0,
+    "pattern_multiple_routes": 0,
+    "trip_multiple_patterns_or_services": 0,
+    "analytics_classification_count_mismatch": 0
+  },
+  "settings": {
+    "memory_limit": "256MB",
+    "threads": 2,
+    "max_temp_directory_size": "1GB"
+  },
+  "classifications": [
+    {
+      "crowding_level": "High",
+      "profiles": 8747
+    },
+    {
+      "crowding_level": "Insufficient Data",
+      "profiles": 894656
+    },
+    {
+      "crowding_level": "Low",
+      "profiles": 571
+    },
+    {
+      "crowding_level": "Moderate",
+      "profiles": 159982
+    }
+  ],
+  "value_checks": {
+    "invalid_slots": 0,
+    "invalid_loads": 0,
+    "unknown_labels": 0,
+    "unsupported_classifications": 0
+  },
+  "schedule_range": {
+    "minimum_seconds": 0,
+    "maximum_seconds": 104113,
+    "events_after_midnight": 18457,
+    "negative_times": 0
+  },
+  "coordinate_checks": {
+    "invalid_stops": 0
+  }
+}

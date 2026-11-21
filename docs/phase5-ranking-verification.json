@@ -1,0 +1,1145 @@
+{
+  "api_version": "0.5.0",
+  "base_url": "http://127.0.0.1:8000",
+  "checks": [
+    {
+      "case": "Low",
+      "parameters": {
+        "source_stop_id": "3619",
+        "destination_stop_id": "3621",
+        "travel_date": "2026-11-20",
+        "departure_time": "09:00:23",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 1,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "comfortable",
+            "balanced"
+          ],
+          "journey_id": "journey_6f12e734b0a6999dcb4a1d08",
+          "trip_ids": [
+            "1011_FULL_08_50"
+          ],
+          "total_duration_seconds": 140,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 1,
+            "classification_counts": {
+              "Low": 1,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 0
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 1.0,
+            "in_vehicle_duration_seconds": 140,
+            "predicted_duration_seconds": 140,
+            "reliably_classified_duration_seconds": 140,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 1.0,
+            "unknown_duration_fraction": 0.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 140,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 0.0,
+            "duration_weighted_penalized_crowding": 0.0,
+            "comfort_eligible": true,
+            "comfort_ineligibility_reasons": []
+          },
+          "ranking": {
+            "duration_component_minutes": 2.3333333333333335,
+            "crowding_penalty_component_minutes": 0.0,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 2.3333333333333335,
+            "unknown_penalized_relative_crowding": 0.0,
+            "comfort_eligible": true
+          }
+        }
+      ],
+      "unavailable_recommendations": []
+    },
+    {
+      "case": "Moderate",
+      "parameters": {
+        "source_stop_id": "1874",
+        "destination_stop_id": "1875",
+        "travel_date": "2026-11-20",
+        "departure_time": "08:01:14",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 1,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "comfortable",
+            "balanced"
+          ],
+          "journey_id": "journey_ab2c288ff5f86df43a23aa4c",
+          "trip_ids": [
+            "1002_FULL_07_15"
+          ],
+          "total_duration_seconds": 102,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 1,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 1,
+              "High": 0,
+              "Insufficient Data": 0
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 1.0,
+            "in_vehicle_duration_seconds": 102,
+            "predicted_duration_seconds": 102,
+            "reliably_classified_duration_seconds": 102,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 1.0,
+            "unknown_duration_fraction": 0.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 102,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 0.5,
+            "duration_weighted_penalized_crowding": 0.5,
+            "comfort_eligible": true,
+            "comfort_ineligibility_reasons": []
+          },
+          "ranking": {
+            "duration_component_minutes": 1.7,
+            "crowding_penalty_component_minutes": 15.0,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 16.7,
+            "unknown_penalized_relative_crowding": 0.5,
+            "comfort_eligible": true
+          }
+        }
+      ],
+      "unavailable_recommendations": []
+    },
+    {
+      "case": "High",
+      "parameters": {
+        "source_stop_id": "1873",
+        "destination_stop_id": "1874",
+        "travel_date": "2026-11-20",
+        "departure_time": "20:24:27",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 1,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "comfortable",
+            "balanced"
+          ],
+          "journey_id": "journey_7b0a90c912a2617885620a0e",
+          "trip_ids": [
+            "1002_FULL_19_40"
+          ],
+          "total_duration_seconds": 107,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 1,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 1,
+              "Insufficient Data": 0
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 1.0,
+            "in_vehicle_duration_seconds": 107,
+            "predicted_duration_seconds": 107,
+            "reliably_classified_duration_seconds": 107,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 1.0,
+            "unknown_duration_fraction": 0.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 107,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 1.0,
+            "duration_weighted_penalized_crowding": 1.0,
+            "comfort_eligible": true,
+            "comfort_ineligibility_reasons": []
+          },
+          "ranking": {
+            "duration_component_minutes": 1.7833333333333334,
+            "crowding_penalty_component_minutes": 30.0,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 31.783333333333335,
+            "unknown_penalized_relative_crowding": 1.0,
+            "comfort_eligible": true
+          }
+        }
+      ],
+      "unavailable_recommendations": []
+    },
+    {
+      "case": "Insufficient Data",
+      "parameters": {
+        "source_stop_id": "1424",
+        "destination_stop_id": "1872",
+        "travel_date": "2026-11-21",
+        "departure_time": "07:55:42",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 1,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "balanced"
+          ],
+          "journey_id": "journey_9a0c722993b49d4aeda9226f",
+          "trip_ids": [
+            "1002_FULL_07_15"
+          ],
+          "total_duration_seconds": 81,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 1
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 81,
+            "predicted_duration_seconds": 81,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 1,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 81,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 1.35,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 38.85,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        }
+      ],
+      "unavailable_recommendations": [
+        {
+          "preference": "comfortable",
+          "code": "insufficient_reliable_coverage",
+          "explanation": "No examined journey has positive in-vehicle duration and at least 0.8 reliable classification coverage by both segment count and duration. Unknown/Insufficient Data is not Low crowding."
+        }
+      ]
+    },
+    {
+      "case": "Medium support Insufficient Data",
+      "parameters": {
+        "source_stop_id": "1423",
+        "destination_stop_id": "1424",
+        "travel_date": "2026-11-20",
+        "departure_time": "20:18:08",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 1,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "balanced"
+          ],
+          "journey_id": "journey_e051b50f9cb1762156969e10",
+          "trip_ids": [
+            "1002_FULL_19_40"
+          ],
+          "total_duration_seconds": 154,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 1
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 154,
+            "predicted_duration_seconds": 154,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 154,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 2.566666666666667,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 40.06666666666667,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        }
+      ],
+      "unavailable_recommendations": [
+        {
+          "preference": "comfortable",
+          "code": "insufficient_reliable_coverage",
+          "explanation": "No examined journey has positive in-vehicle duration and at least 0.8 reliable classification coverage by both segment count and duration. Unknown/Insufficient Data is not Low crowding."
+        }
+      ]
+    },
+    {
+      "case": "preference_fastest",
+      "parameters": {
+        "source_stop_id": "3619",
+        "destination_stop_id": "3621",
+        "travel_date": "2026-11-20",
+        "departure_time": "08:45:23",
+        "max_wait_minutes": 30,
+        "max_transfers": 0,
+        "limit": 1,
+        "preference": "fastest"
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 26,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest"
+          ],
+          "journey_id": "journey_f590df0e1665f0b98348b8ff",
+          "trip_ids": [
+            "2195_FULL_08_35"
+          ],
+          "total_duration_seconds": 152,
+          "crowding": {
+            "total_segments": 2,
+            "predicted_segments": 0,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 2
+            },
+            "prediction_coverage": 0.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 151,
+            "predicted_duration_seconds": 0,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 0.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 2
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 151
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 2.533333333333333,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 40.03333333333333,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        },
+        {
+          "preferences": [
+            "comfortable",
+            "balanced"
+          ],
+          "journey_id": "journey_6f12e734b0a6999dcb4a1d08",
+          "trip_ids": [
+            "1011_FULL_08_50"
+          ],
+          "total_duration_seconds": 1040,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 1,
+            "classification_counts": {
+              "Low": 1,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 0
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 1.0,
+            "in_vehicle_duration_seconds": 140,
+            "predicted_duration_seconds": 140,
+            "reliably_classified_duration_seconds": 140,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 1.0,
+            "unknown_duration_fraction": 0.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 140,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 0.0,
+            "duration_weighted_penalized_crowding": 0.0,
+            "comfort_eligible": true,
+            "comfort_ineligibility_reasons": []
+          },
+          "ranking": {
+            "duration_component_minutes": 17.333333333333332,
+            "crowding_penalty_component_minutes": 0.0,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 17.333333333333332,
+            "unknown_penalized_relative_crowding": 0.0,
+            "comfort_eligible": true
+          }
+        }
+      ],
+      "unavailable_recommendations": []
+    },
+    {
+      "case": "preference_comfortable",
+      "parameters": {
+        "source_stop_id": "3619",
+        "destination_stop_id": "3621",
+        "travel_date": "2026-11-20",
+        "departure_time": "08:45:23",
+        "max_wait_minutes": 30,
+        "max_transfers": 0,
+        "limit": 1,
+        "preference": "comfortable"
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 26,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest"
+          ],
+          "journey_id": "journey_f590df0e1665f0b98348b8ff",
+          "trip_ids": [
+            "2195_FULL_08_35"
+          ],
+          "total_duration_seconds": 152,
+          "crowding": {
+            "total_segments": 2,
+            "predicted_segments": 0,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 2
+            },
+            "prediction_coverage": 0.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 151,
+            "predicted_duration_seconds": 0,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 0.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 2
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 151
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 2.533333333333333,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 40.03333333333333,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        },
+        {
+          "preferences": [
+            "comfortable",
+            "balanced"
+          ],
+          "journey_id": "journey_6f12e734b0a6999dcb4a1d08",
+          "trip_ids": [
+            "1011_FULL_08_50"
+          ],
+          "total_duration_seconds": 1040,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 1,
+            "classification_counts": {
+              "Low": 1,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 0
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 1.0,
+            "in_vehicle_duration_seconds": 140,
+            "predicted_duration_seconds": 140,
+            "reliably_classified_duration_seconds": 140,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 1.0,
+            "unknown_duration_fraction": 0.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 140,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 0.0,
+            "duration_weighted_penalized_crowding": 0.0,
+            "comfort_eligible": true,
+            "comfort_ineligibility_reasons": []
+          },
+          "ranking": {
+            "duration_component_minutes": 17.333333333333332,
+            "crowding_penalty_component_minutes": 0.0,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 17.333333333333332,
+            "unknown_penalized_relative_crowding": 0.0,
+            "comfort_eligible": true
+          }
+        }
+      ],
+      "unavailable_recommendations": []
+    },
+    {
+      "case": "preference_balanced",
+      "parameters": {
+        "source_stop_id": "3619",
+        "destination_stop_id": "3621",
+        "travel_date": "2026-11-20",
+        "departure_time": "08:45:23",
+        "max_wait_minutes": 30,
+        "max_transfers": 0,
+        "limit": 1,
+        "preference": "balanced"
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 26,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest"
+          ],
+          "journey_id": "journey_f590df0e1665f0b98348b8ff",
+          "trip_ids": [
+            "2195_FULL_08_35"
+          ],
+          "total_duration_seconds": 152,
+          "crowding": {
+            "total_segments": 2,
+            "predicted_segments": 0,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 2
+            },
+            "prediction_coverage": 0.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 151,
+            "predicted_duration_seconds": 0,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 0.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 2
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 151
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 2.533333333333333,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 40.03333333333333,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        },
+        {
+          "preferences": [
+            "comfortable",
+            "balanced"
+          ],
+          "journey_id": "journey_6f12e734b0a6999dcb4a1d08",
+          "trip_ids": [
+            "1011_FULL_08_50"
+          ],
+          "total_duration_seconds": 1040,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 1,
+            "reliably_classified_segments": 1,
+            "classification_counts": {
+              "Low": 1,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 0
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 1.0,
+            "in_vehicle_duration_seconds": 140,
+            "predicted_duration_seconds": 140,
+            "reliably_classified_duration_seconds": 140,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 1.0,
+            "unknown_duration_fraction": 0.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 1,
+              "Low": 0,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 140,
+              "Low": 0,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 0.0,
+            "duration_weighted_penalized_crowding": 0.0,
+            "comfort_eligible": true,
+            "comfort_ineligibility_reasons": []
+          },
+          "ranking": {
+            "duration_component_minutes": 17.333333333333332,
+            "crowding_penalty_component_minutes": 0.0,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 17.333333333333332,
+            "unknown_penalized_relative_crowding": 0.0,
+            "comfort_eligible": true
+          }
+        }
+      ],
+      "unavailable_recommendations": []
+    },
+    {
+      "case": "unavailable_comfort",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10079",
+        "travel_date": "2026-11-20",
+        "departure_time": "06:09",
+        "max_transfers": 0,
+        "preference": "comfortable"
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": false,
+      "ranking_candidates_evaluated": 3,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "balanced"
+          ],
+          "journey_id": "journey_2948c2cb4f22e688e236af24",
+          "trip_ids": [
+            "1050_FULL_06_10"
+          ],
+          "total_duration_seconds": 258,
+          "crowding": {
+            "total_segments": 1,
+            "predicted_segments": 0,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 1
+            },
+            "prediction_coverage": 0.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 198,
+            "predicted_duration_seconds": 0,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 0.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 1
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 198
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 4.3,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 41.8,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        }
+      ],
+      "unavailable_recommendations": [
+        {
+          "preference": "comfortable",
+          "code": "insufficient_reliable_coverage",
+          "explanation": "No examined journey has positive in-vehicle duration and at least 0.8 reliable classification coverage by both segment count and duration. Unknown/Insufficient Data is not Low crowding."
+        }
+      ]
+    },
+    {
+      "case": "civil_weekend_after_midnight",
+      "parameters": {
+        "source_stop_id": "10097",
+        "destination_stop_id": "3638",
+        "travel_date": "2026-11-20",
+        "departure_time": "23:59:39",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 1,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "balanced"
+          ],
+          "journey_id": "journey_0138120caa9045e4dacc3208",
+          "trip_ids": [
+            "1001_FULL_22_50"
+          ],
+          "total_duration_seconds": 236,
+          "crowding": {
+            "total_segments": 2,
+            "predicted_segments": 0,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 2
+            },
+            "prediction_coverage": 0.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 236,
+            "predicted_duration_seconds": 0,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 0.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 2
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 236
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 3.933333333333333,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 41.43333333333333,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        }
+      ],
+      "unavailable_recommendations": [
+        {
+          "preference": "comfortable",
+          "code": "insufficient_reliable_coverage",
+          "explanation": "No examined journey has positive in-vehicle duration and at least 0.8 reliable classification coverage by both segment count and duration. Unknown/Insufficient Data is not Low crowding."
+        }
+      ]
+    },
+    {
+      "case": "per_segment_slot_change",
+      "parameters": {
+        "source_stop_id": "7975",
+        "destination_stop_id": "3621",
+        "travel_date": "2026-11-20",
+        "departure_time": "08:50:00",
+        "max_wait_minutes": 0,
+        "max_transfers": 0,
+        "limit": 20
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 2,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "balanced"
+          ],
+          "journey_id": "journey_be2daf531867483d4d35f70c",
+          "trip_ids": [
+            "1011_FULL_08_50"
+          ],
+          "total_duration_seconds": 763,
+          "crowding": {
+            "total_segments": 9,
+            "predicted_segments": 9,
+            "reliably_classified_segments": 7,
+            "classification_counts": {
+              "Low": 1,
+              "Moderate": 6,
+              "High": 0,
+              "Insufficient Data": 2
+            },
+            "prediction_coverage": 1.0,
+            "reliable_classification_coverage": 0.7777777777777778,
+            "in_vehicle_duration_seconds": 763,
+            "predicted_duration_seconds": 763,
+            "reliably_classified_duration_seconds": 648,
+            "duration_prediction_coverage": 1.0,
+            "duration_reliable_classification_coverage": 0.8492791612057667,
+            "unknown_duration_fraction": 0.15072083879423326,
+            "data_support": {
+              "High": 0,
+              "Medium": 7,
+              "Low": 2,
+              "Missing": 0
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 648,
+              "Low": 115,
+              "Missing": 0
+            },
+            "duration_weighted_relative_crowding": 0.39197530864197533,
+            "duration_weighted_penalized_crowding": 0.52129750982962,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 12.716666666666667,
+            "crowding_penalty_component_minutes": 15.6389252948886,
+            "transfer_penalty_component_minutes": 0.0,
+            "balanced_score_minutes": 28.355591961555266,
+            "unknown_penalized_relative_crowding": 0.52129750982962,
+            "comfort_eligible": false
+          }
+        }
+      ],
+      "unavailable_recommendations": [
+        {
+          "preference": "comfortable",
+          "code": "insufficient_reliable_coverage",
+          "explanation": "No examined journey has positive in-vehicle duration and at least 0.8 reliable classification coverage by both segment count and duration. Unknown/Insufficient Data is not Low crowding."
+        }
+      ]
+    },
+    {
+      "case": "real_transfer_with_segment_evidence",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10081",
+        "travel_date": "2026-11-20",
+        "departure_time": "06:09",
+        "limit": 3
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "preference_available": true,
+      "ranking_candidates_evaluated": 13,
+      "recommendations": [
+        {
+          "preferences": [
+            "fastest",
+            "balanced"
+          ],
+          "journey_id": "journey_5bf999fe787a51f02bd72823",
+          "trip_ids": [
+            "1050_FULL_06_10",
+            "3684_FULL_06_15"
+          ],
+          "total_duration_seconds": 811,
+          "crowding": {
+            "total_segments": 3,
+            "predicted_segments": 0,
+            "reliably_classified_segments": 0,
+            "classification_counts": {
+              "Low": 0,
+              "Moderate": 0,
+              "High": 0,
+              "Insufficient Data": 3
+            },
+            "prediction_coverage": 0.0,
+            "reliable_classification_coverage": 0.0,
+            "in_vehicle_duration_seconds": 422,
+            "predicted_duration_seconds": 0,
+            "reliably_classified_duration_seconds": 0,
+            "duration_prediction_coverage": 0.0,
+            "duration_reliable_classification_coverage": 0.0,
+            "unknown_duration_fraction": 1.0,
+            "data_support": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 3
+            },
+            "data_support_duration_seconds": {
+              "High": 0,
+              "Medium": 0,
+              "Low": 0,
+              "Missing": 422
+            },
+            "duration_weighted_relative_crowding": null,
+            "duration_weighted_penalized_crowding": 1.25,
+            "comfort_eligible": false,
+            "comfort_ineligibility_reasons": [
+              "insufficient_reliable_segment_coverage",
+              "insufficient_reliable_duration_coverage"
+            ]
+          },
+          "ranking": {
+            "duration_component_minutes": 13.516666666666667,
+            "crowding_penalty_component_minutes": 37.5,
+            "transfer_penalty_component_minutes": 5.0,
+            "balanced_score_minutes": 56.016666666666666,
+            "unknown_penalized_relative_crowding": 1.25,
+            "comfort_eligible": false
+          }
+        }
+      ],
+      "unavailable_recommendations": [
+        {
+          "preference": "comfortable",
+          "code": "insufficient_reliable_coverage",
+          "explanation": "No examined journey has positive in-vehicle duration and at least 0.8 reliable classification coverage by both segment count and duration. Unknown/Insufficient Data is not Low crowding."
+        }
+      ]
+    },
+    {
+      "case": "unsupported_date",
+      "parameters": {
+        "source_stop_id": "3619",
+        "destination_stop_id": "3621",
+        "travel_date": "2024-11-20",
+        "departure_time": "08:45"
+      },
+      "http_status": 200,
+      "planner_status": "unsupported_date",
+      "preference_available": false,
+      "ranking_candidates_evaluated": 0,
+      "recommendations": [],
+      "unavailable_recommendations": [
+        {
+          "preference": "fastest",
+          "code": "no_feasible_journey",
+          "explanation": "No feasible journey was available in the bounded timetable search."
+        },
+        {
+          "preference": "comfortable",
+          "code": "no_feasible_journey",
+          "explanation": "No feasible journey was available in the bounded timetable search."
+        },
+        {
+          "preference": "balanced",
+          "code": "no_feasible_journey",
+          "explanation": "No feasible journey was available in the bounded timetable search."
+        }
+      ]
+    },
+    {
+      "case": "invalid_preference",
+      "http_status": 422
+    }
+  ],
+  "documented_api_paths": 14,
+  "swagger": "passed",
+  "summary": "14 live journey/ranking checks passed using actual exports; no occupancy/seat guarantees."
+}

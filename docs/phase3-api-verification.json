@@ -1,0 +1,99 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "checks": [
+    {
+      "path": "/api/health",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 308.05
+    },
+    {
+      "path": "/api/model-info",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 7.86
+    },
+    {
+      "path": "/api/stops?search=Rohini&limit=3",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 152.66
+    },
+    {
+      "path": "/api/routes?limit=3",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 119.83
+    },
+    {
+      "path": "/api/routes/1",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 241.42
+    },
+    {
+      "path": "/api/routes/1/segments?pattern_id=1&limit=3",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 412.72
+    },
+    {
+      "path": "/api/crowding?route_id=1&pattern_id=1&is_weekend=false&time_slot=12&limit=3",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 160.27,
+      "prediction_status": "unavailable"
+    },
+    {
+      "path": "/api/analytics/overview",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 246.1
+    },
+    {
+      "path": "/api/analytics/routes?limit=3",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 135.46
+    },
+    {
+      "path": "/api/analytics/heatmap?limit=3",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 125.88
+    },
+    {
+      "path": "/api/analytics/weekly",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 6.34
+    },
+    {
+      "path": "/api/analytics/peak-hours",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 6.23
+    },
+    {
+      "path": "/api/analytics/model-performance",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 19.27
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "elapsed_ms": 27.18
+    },
+    {
+      "path": "/openapi.json",
+      "status": 200,
+      "content_type": "application/json",
+      "elapsed_ms": 142.95,
+      "documented_api_paths": 13
+    }
+  ],
+  "local_cors_preflight": "passed",
+  "summary": "All 13 API endpoints, Swagger HTML and OpenAPI JSON passed over live HTTP."
+}

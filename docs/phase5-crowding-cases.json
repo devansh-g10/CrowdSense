@@ -1,0 +1,100 @@
+{
+  "cases": {
+    "Low": {
+      "route_id": "1011",
+      "pattern_id": 19,
+      "trip_id": "1011_FULL_08_50",
+      "from_stop_id": "3619",
+      "to_stop_id": "3621",
+      "stop_sequence": 8,
+      "departure_seconds": 32423,
+      "next_seconds": 32563,
+      "is_weekend": false,
+      "crowding_level": "Low",
+      "data_support": "Medium",
+      "predicted_load": 0.5,
+      "travel_date": "2026-11-20"
+    },
+    "Moderate": {
+      "route_id": "1002",
+      "pattern_id": 9,
+      "trip_id": "1002_FULL_07_15",
+      "from_stop_id": "1874",
+      "to_stop_id": "1875",
+      "stop_sequence": 31,
+      "departure_seconds": 28874,
+      "next_seconds": 28976,
+      "is_weekend": false,
+      "crowding_level": "Moderate",
+      "data_support": "Medium",
+      "predicted_load": 1.0,
+      "travel_date": "2026-11-20"
+    },
+    "High": {
+      "route_id": "1002",
+      "pattern_id": 9,
+      "trip_id": "1002_FULL_19_40",
+      "from_stop_id": "1873",
+      "to_stop_id": "1874",
+      "stop_sequence": 30,
+      "departure_seconds": 73467,
+      "next_seconds": 73574,
+      "is_weekend": false,
+      "crowding_level": "High",
+      "data_support": "Medium",
+      "predicted_load": 2.0,
+      "travel_date": "2026-11-20"
+    },
+    "Insufficient Data": {
+      "route_id": "1002",
+      "pattern_id": 9,
+      "trip_id": "1002_FULL_07_15",
+      "from_stop_id": "1424",
+      "to_stop_id": "1872",
+      "stop_sequence": 28,
+      "departure_seconds": 28542,
+      "next_seconds": 28623,
+      "is_weekend": true,
+      "crowding_level": "Insufficient Data",
+      "data_support": "Low",
+      "predicted_load": 1.0,
+      "travel_date": "2026-11-21"
+    },
+    "Medium support Insufficient Data": {
+      "route_id": "1002",
+      "pattern_id": 9,
+      "trip_id": "1002_FULL_19_40",
+      "from_stop_id": "1423",
+      "to_stop_id": "1424",
+      "stop_sequence": 27,
+      "departure_seconds": 73088,
+      "next_seconds": 73242,
+      "is_weekend": false,
+      "crowding_level": "Insufficient Data",
+      "data_support": "Medium",
+      "predicted_load": 1.0,
+      "travel_date": "2026-11-20"
+    },
+    "slot_crossing": {
+      "route_id": "1011",
+      "pattern_id": 19,
+      "trip_id": "1011_FULL_08_50",
+      "from_stop_id": "7975",
+      "to_stop_id": "3621",
+      "stop_sequence": 8,
+      "departure_seconds": 32423,
+      "next_seconds": 32563,
+      "is_weekend": false,
+      "crowding_level": "Low",
+      "data_support": "Medium",
+      "predicted_load": 0.5,
+      "travel_date": "2026-11-20",
+      "boarding_sequence": 0,
+      "boarding_departure_seconds": 31800
+    }
+  },
+  "inputs_sha256": {
+    "crowding_model.parquet": "b5259f51f83a9f7cc234422566e3666044e94ff598ebfe3e55196a84b6196c94",
+    "trip_schedule.parquet": "ac52cf8ec3581e80586f892eba92aec0eab4b4ca82d40de00874a3e3dee8d41d"
+  }
+}

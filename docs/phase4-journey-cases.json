@@ -1,0 +1,82 @@
+{
+  "reference_travel_date": "2026-11-20",
+  "direct": {
+    "trip_id": "1000_FULL_06_10",
+    "route_id": "1000",
+    "pattern_id": 4,
+    "source_stop_id": "8394",
+    "destination_stop_id": "10079",
+    "board_sequence": 0,
+    "alight_sequence": 1,
+    "departure_seconds": 22200,
+    "next_departure_seconds": 22398
+  },
+  "transfer_only": {
+    "first_trip": "1000_FULL_06_10",
+    "transfer_stop_id": "10080",
+    "first_alight_sequence": 2,
+    "first_arrival_seconds": 22527,
+    "second_trip": "3684_FULL_06_15",
+    "second_board_sequence": 2,
+    "second_departure_seconds": 22856,
+    "destination_stop_id": "10081",
+    "destination_arrival_seconds": 22951,
+    "source_stop_id": "8394",
+    "departure_seconds": 22200
+  },
+  "midnight": {
+    "trip_id": "1001_FULL_22_50",
+    "route_id": "1001",
+    "pattern_id": 6,
+    "source_stop_id": "10097",
+    "destination_stop_id": "5015",
+    "board_sequence": 45,
+    "alight_sequence": 46,
+    "departure_seconds": 86379,
+    "next_departure_seconds": 86417
+  },
+  "previous_service_day": {
+    "trip_id": "1001_FULL_22_50",
+    "route_id": "1001",
+    "pattern_id": 6,
+    "source_stop_id": "5015",
+    "destination_stop_id": "3638",
+    "board_sequence": 46,
+    "alight_sequence": 47,
+    "departure_seconds": 86417,
+    "next_departure_seconds": 86615
+  },
+  "cross_service_day_transfer": {
+    "first_trip": "1001_FULL_22_50",
+    "transfer_stop_id": "7976",
+    "first_alight_sequence": 50,
+    "first_arrival_seconds": 86883,
+    "second_trip": "585_FULL_00_10",
+    "second_departure_seconds": 87042,
+    "destination_stop_id": "1245",
+    "destination_arrival_seconds": 87114,
+    "source_stop_id": "10097",
+    "departure_seconds": 86379
+  },
+  "repeated_stops": {
+    "trip_id": "1184_FULL_07_14",
+    "repeated_stop_id": "1320",
+    "first_occurrence": 23,
+    "last_occurrence": 24,
+    "source_stop_id": "1318",
+    "destination_stop_id": "1321",
+    "board_sequence": 22,
+    "alight_sequence": 25,
+    "departure_seconds": 28031
+  },
+  "no_direct": {
+    "destination_stop_id": "1",
+    "source_stop_id": "8394",
+    "departure_seconds": 22200
+  },
+  "schedule_order_checks": {
+    "backwards_events": 0,
+    "equal_time_events": 1649
+  },
+  "calendar_exception_files": []
+}

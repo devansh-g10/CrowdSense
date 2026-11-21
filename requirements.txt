@@ -1,0 +1,3 @@
+-r backend/requirements.txt
+# Automated API tests
+httpx==0.28.1

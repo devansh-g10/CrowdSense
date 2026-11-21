@@ -1,0 +1,567 @@
+{
+  "provenance": {
+    "mode": "existing_export_copy",
+    "source": "D:\\CrowdSense\\CrowdSense\\CrowdRoute_Delhi_Model",
+    "archive_status": "User confirmed this folder was already extracted from the model ZIP before this session; archive bytes unavailable for CRC verification."
+  },
+  "duckdb_version": "2.0.0",
+  "expected_count_source": "Notebook cell 65 saved output, not recomputed training",
+  "files": [
+    {
+      "name": "calendar.parquet",
+      "bytes": 2019,
+      "sha256": "3ec2f1b1631072a829db9741c3bd59f3c279dda0811c17b2f8ef87068bd9c298",
+      "schema": [
+        {
+          "name": "service_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "monday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "tuesday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "wednesday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "thursday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "friday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "saturday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "sunday",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "start_date",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "end_date",
+          "type": "VARCHAR"
+        }
+      ],
+      "rows": 1,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "crowding_model.parquet",
+      "bytes": 6630974,
+      "sha256": "b5259f51f83a9f7cc234422566e3666044e94ff598ebfe3e55196a84b6196c94",
+      "schema": [
+        {
+          "name": "route_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "pattern_id",
+          "type": "BIGINT"
+        },
+        {
+          "name": "stop_sequence",
+          "type": "BIGINT"
+        },
+        {
+          "name": "from_stop_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "to_stop_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "is_weekend",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "time_slot",
+          "type": "INTEGER"
+        },
+        {
+          "name": "baseline_prediction",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "predicted_load",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "prediction_source",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "sample_journeys",
+          "type": "BIGINT"
+        },
+        {
+          "name": "observed_days",
+          "type": "BIGINT"
+        },
+        {
+          "name": "peak_load_p90",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "lower_threshold",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "upper_threshold",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "reference_samples",
+          "type": "BIGINT"
+        },
+        {
+          "name": "data_support",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "crowding_level",
+          "type": "VARCHAR"
+        }
+      ],
+      "rows": 1063956,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "model_comparison.csv",
+      "bytes": 91,
+      "sha256": "9141bdbb8a1686fb581a6361162706812ab7f4455415fc1a39818e8dc9b9ad81",
+      "columns": [
+        "model",
+        "observations",
+        "MAE",
+        "RMSE"
+      ],
+      "rows": 2,
+      "values": [
+        {
+          "model": "Baseline",
+          "observations": "404017",
+          "MAE": "0.4895",
+          "RMSE": "0.9415"
+        },
+        {
+          "model": "Final Model",
+          "observations": "404017",
+          "MAE": "0.4766",
+          "RMSE": "0.9346"
+        }
+      ]
+    },
+    {
+      "name": "model_metadata.json",
+      "bytes": 1058,
+      "sha256": "ae0f1fb8f65d9a88acb71d45674c8075f5f09d85fa6220e12f5c6ee10e37f8c7",
+      "metadata": {
+        "project": "CrowdRoute Delhi",
+        "model_type": "Historical Median with Hourly Fallback",
+        "version": "1.0",
+        "timezone": "Asia/Kolkata",
+        "training_period": "2026-10-01 to 2026-10-21",
+        "validation_period": "2026-10-22 to 2026-10-24",
+        "testing_period": "2026-10-25 to 2026-10-31",
+        "time_slot_minutes": 30,
+        "total_ticket_records": 2559899,
+        "final_profiles": 1063956,
+        "crowding_type": "Relative historical crowding",
+        "minimum_profile_samples": 5,
+        "minimum_profile_days": 3,
+        "minimum_reference_samples": 20,
+        "minimum_reference_days": 5,
+        "actual_occupancy_validated": false,
+        "capacity_calibration_available": false,
+        "limitations": [
+          "Missing vehicle numbers",
+          "Unmatched ticket stops",
+          "Partial ticket assignment coverage",
+          "Schedule based trip reconstruction",
+          "Unrecorded passengers and pass holders",
+          "Assumed alighting at ticket destination",
+          "Unknown actual bus capacity",
+          "Relative crowding is not seat availability"
+        ]
+      }
+    },
+    {
+      "name": "peak_analysis.csv",
+      "bytes": 290,
+      "sha256": "57a6f694fe65b37c9e3a461b4dccbaec690362e97b2686aade6cc46e6469723a",
+      "columns": [
+        "day_type",
+        "period",
+        "segment_observations",
+        "average_load",
+        "peak_load_p90"
+      ],
+      "rows": 6,
+      "values": [
+        {
+          "day_type": "Weekday",
+          "period": "Evening Peak",
+          "segment_observations": "425311",
+          "average_load": "1.316",
+          "peak_load_p90": "2.0"
+        },
+        {
+          "day_type": "Weekday",
+          "period": "Morning Peak",
+          "segment_observations": "673746",
+          "average_load": "1.347",
+          "peak_load_p90": "2.0"
+        },
+        {
+          "day_type": "Weekday",
+          "period": "Other Hours",
+          "segment_observations": "585883",
+          "average_load": "1.266",
+          "peak_load_p90": "2.0"
+        },
+        {
+          "day_type": "Weekend",
+          "period": "Evening Peak",
+          "segment_observations": "138428",
+          "average_load": "1.303",
+          "peak_load_p90": "2.0"
+        },
+        {
+          "day_type": "Weekend",
+          "period": "Morning Peak",
+          "segment_observations": "206818",
+          "average_load": "1.287",
+          "peak_load_p90": "2.0"
+        },
+        {
+          "day_type": "Weekend",
+          "period": "Other Hours",
+          "segment_observations": "223752",
+          "average_load": "1.293",
+          "peak_load_p90": "2.0"
+        }
+      ]
+    },
+    {
+      "name": "route_analytics.parquet",
+      "bytes": 368416,
+      "sha256": "ab95e368b0d5351bd54fb07188bc3e14db0d5e5de536041213506579ffc761ea",
+      "schema": [
+        {
+          "name": "route_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_name",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "is_weekend",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "time_slot",
+          "type": "INTEGER"
+        },
+        {
+          "name": "segment_profiles",
+          "type": "BIGINT"
+        },
+        {
+          "name": "average_recorded_load",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "maximum_recorded_load",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "low_crowding_segments",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "moderate_crowding_segments",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "high_crowding_segments",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "insufficient_data_segments",
+          "type": "DOUBLE"
+        }
+      ],
+      "rows": 50318,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "route_lookup.parquet",
+      "bytes": 27869,
+      "sha256": "615a8efb63a3363e7ac91d76d13f448de492874367a42ae83ba3e66cd4637996",
+      "schema": [
+        {
+          "name": "ticket_route",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_id",
+          "type": "VARCHAR"
+        }
+      ],
+      "rows": 1980,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "route_stop_sequence.parquet",
+      "bytes": 761150,
+      "sha256": "6d0350ba6b5ccb25bc08c961135b55941ecdc94284d06c4062facdcf5680578f",
+      "schema": [
+        {
+          "name": "pattern_id",
+          "type": "BIGINT"
+        },
+        {
+          "name": "route_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_name",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_key",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_sequence",
+          "type": "BIGINT"
+        },
+        {
+          "name": "latitude",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "longitude",
+          "type": "DOUBLE"
+        }
+      ],
+      "rows": 109660,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "routes.parquet",
+      "bytes": 81959,
+      "sha256": "ec02b8c2359165d4df5428b56e46fa5ceb2e94a47efecd684f459c9ff708d383",
+      "schema": [
+        {
+          "name": "agency_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_long_name",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_short_name",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_desc",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "route_type",
+          "type": "VARCHAR"
+        }
+      ],
+      "rows": 2574,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "stops.parquet",
+      "bytes": 232261,
+      "sha256": "8bcf5f42078b339439aec425536711834d555055f5cac27e701de97e8947995e",
+      "schema": [
+        {
+          "name": "stop_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_name",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_key",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "latitude",
+          "type": "DOUBLE"
+        },
+        {
+          "name": "longitude",
+          "type": "DOUBLE"
+        }
+      ],
+      "rows": 6862,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "test_metrics.csv",
+      "bytes": 167,
+      "sha256": "f7395ef5d75b75a467b3852e1bcbf0e8ed6c76dffb405520304974c0ecbe9b65",
+      "columns": [
+        "total_observations",
+        "evaluated_observations",
+        "MAE",
+        "RMSE",
+        "prediction_bias",
+        "within_one_passenger_percentage",
+        "coverage_percentage"
+      ],
+      "rows": 1,
+      "values": [
+        {
+          "total_observations": "522214",
+          "evaluated_observations": "442098",
+          "MAE": "0.4686",
+          "RMSE": "0.9216",
+          "prediction_bias": "-0.1388",
+          "within_one_passenger_percentage": "90.97",
+          "coverage_percentage": "84.66"
+        }
+      ]
+    },
+    {
+      "name": "trip_schedule.parquet",
+      "bytes": 10314104,
+      "sha256": "ac52cf8ec3581e80586f892eba92aec0eab4b4ca82d40de00874a3e3dee8d41d",
+      "schema": [
+        {
+          "name": "pattern_id",
+          "type": "BIGINT"
+        },
+        {
+          "name": "route_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "trip_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "service_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_id",
+          "type": "VARCHAR"
+        },
+        {
+          "name": "stop_sequence",
+          "type": "BIGINT"
+        },
+        {
+          "name": "departure_seconds",
+          "type": "INTEGER"
+        }
+      ],
+      "rows": 2737136,
+      "full_column_scan": "passed"
+    },
+    {
+      "name": "weekly_analysis.csv",
+      "bytes": 281,
+      "sha256": "8113c364e0d8e13de3124364f22edfc40f28f0d5d17471f955ebbd08f3a8bbe5",
+      "columns": [
+        "week_number",
+        "segment_observations",
+        "observed_days",
+        "observed_journeys",
+        "average_recorded_load",
+        "median_recorded_load",
+        "p90_recorded_load"
+      ],
+      "rows": 5,
+      "values": [
+        {
+          "week_number": "1",
+          "segment_observations": "494347",
+          "observed_days": "7",
+          "observed_journeys": "32430",
+          "average_recorded_load": "1.293",
+          "median_recorded_load": "1.0",
+          "p90_recorded_load": "2.0"
+        },
+        {
+          "week_number": "2",
+          "segment_observations": "499045",
+          "observed_days": "7",
+          "observed_journeys": "33536",
+          "average_recorded_load": "1.305",
+          "median_recorded_load": "1.0",
+          "p90_recorded_load": "2.0"
+        },
+        {
+          "week_number": "3",
+          "segment_observations": "504358",
+          "observed_days": "7",
+          "observed_journeys": "33751",
+          "average_recorded_load": "1.311",
+          "median_recorded_load": "1.0",
+          "p90_recorded_load": "2.0"
+        },
+        {
+          "week_number": "4",
+          "segment_observations": "532849",
+          "observed_days": "7",
+          "observed_journeys": "35228",
+          "average_recorded_load": "1.316",
+          "median_recorded_load": "1.0",
+          "p90_recorded_load": "2.0"
+        },
+        {
+          "week_number": "5",
+          "segment_observations": "223339",
+          "observed_days": "3",
+          "observed_journeys": "14906",
+          "average_recorded_load": "1.308",
+          "median_recorded_load": "1.0",
+          "p90_recorded_load": "2.0"
+        }
+      ]
+    }
+  ],
+  "classifications": {
+    "Moderate": 159982,
+    "High": 8747,
+    "Insufficient Data": 894656,
+    "Low": 571
+  },
+  "model_checks": {
+    "invalid_rows": 0,
+    "profile_count_matches_metadata": true
+  },
+  "verification": "13 files verified; existing originals unchanged"
+}

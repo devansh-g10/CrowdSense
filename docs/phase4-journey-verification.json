@@ -1,0 +1,279 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "api_version": "0.4.0",
+  "documented_api_paths": 14,
+  "swagger": "passed",
+  "checks": [
+    {
+      "case": "direct",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10079",
+        "travel_date": "2026-11-20",
+        "departure_time": "06:09:00",
+        "limit": 3,
+        "max_transfers": 0
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "journeys_returned": 3,
+      "search_truncated": false,
+      "elapsed_ms": 911.79,
+      "first_journey": {
+        "transfers": 0,
+        "departure_at": "2026-11-20T06:10:00+05:30",
+        "estimated_arrival_at": "2026-11-20T06:13:18+05:30",
+        "initial_wait_seconds": 60,
+        "transfer_wait_seconds": 0,
+        "travel_duration_seconds": 198,
+        "duration_is_approximate": true,
+        "trip_ids": [
+          "1000_FULL_06_10"
+        ],
+        "service_dates": [
+          "2026-11-20"
+        ]
+      }
+    },
+    {
+      "case": "transfer_only",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10081",
+        "travel_date": "2026-11-20",
+        "departure_time": "06:09:00",
+        "limit": 3
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "journeys_returned": 3,
+      "search_truncated": false,
+      "elapsed_ms": 925.75,
+      "first_journey": {
+        "transfers": 1,
+        "departure_at": "2026-11-20T06:10:00+05:30",
+        "estimated_arrival_at": "2026-11-20T06:22:31+05:30",
+        "initial_wait_seconds": 60,
+        "transfer_wait_seconds": 329,
+        "travel_duration_seconds": 751,
+        "duration_is_approximate": true,
+        "trip_ids": [
+          "1000_FULL_06_10",
+          "3684_FULL_06_15"
+        ],
+        "service_dates": [
+          "2026-11-20",
+          "2026-11-20"
+        ]
+      }
+    },
+    {
+      "case": "midnight",
+      "parameters": {
+        "source_stop_id": "10097",
+        "destination_stop_id": "5015",
+        "travel_date": "2026-11-20",
+        "departure_time": "23:59:39",
+        "limit": 3,
+        "max_transfers": 0,
+        "max_wait_minutes": 0
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "journeys_returned": 1,
+      "search_truncated": false,
+      "elapsed_ms": 564.05,
+      "first_journey": {
+        "transfers": 0,
+        "departure_at": "2026-11-20T23:59:39+05:30",
+        "estimated_arrival_at": "2026-11-21T00:00:17+05:30",
+        "initial_wait_seconds": 0,
+        "transfer_wait_seconds": 0,
+        "travel_duration_seconds": 38,
+        "duration_is_approximate": true,
+        "trip_ids": [
+          "1001_FULL_22_50"
+        ],
+        "service_dates": [
+          "2026-11-20"
+        ]
+      }
+    },
+    {
+      "case": "previous_service_day",
+      "parameters": {
+        "source_stop_id": "5015",
+        "destination_stop_id": "3638",
+        "travel_date": "2026-11-21",
+        "departure_time": "00:00:17",
+        "limit": 3,
+        "max_transfers": 0,
+        "max_wait_minutes": 0
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "journeys_returned": 1,
+      "search_truncated": false,
+      "elapsed_ms": 534.46,
+      "first_journey": {
+        "transfers": 0,
+        "departure_at": "2026-11-21T00:00:17+05:30",
+        "estimated_arrival_at": "2026-11-21T00:03:35+05:30",
+        "initial_wait_seconds": 0,
+        "transfer_wait_seconds": 0,
+        "travel_duration_seconds": 198,
+        "duration_is_approximate": true,
+        "trip_ids": [
+          "1001_FULL_22_50"
+        ],
+        "service_dates": [
+          "2026-11-20"
+        ]
+      }
+    },
+    {
+      "case": "cross_service_day_transfer",
+      "parameters": {
+        "source_stop_id": "10097",
+        "destination_stop_id": "1245",
+        "travel_date": "2026-11-20",
+        "departure_time": "23:58:39",
+        "limit": 3
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "journeys_returned": 3,
+      "search_truncated": false,
+      "elapsed_ms": 935.49,
+      "first_journey": {
+        "transfers": 1,
+        "departure_at": "2026-11-20T23:59:39+05:30",
+        "estimated_arrival_at": "2026-11-21T00:11:54+05:30",
+        "initial_wait_seconds": 60,
+        "transfer_wait_seconds": 159,
+        "travel_duration_seconds": 735,
+        "duration_is_approximate": true,
+        "trip_ids": [
+          "1001_FULL_22_50",
+          "585_FULL_00_10"
+        ],
+        "service_dates": [
+          "2026-11-20",
+          "2026-11-21"
+        ]
+      }
+    },
+    {
+      "case": "repeated_stops",
+      "parameters": {
+        "source_stop_id": "1318",
+        "destination_stop_id": "1321",
+        "travel_date": "2026-11-20",
+        "departure_time": "07:47:11",
+        "limit": 3,
+        "max_transfers": 0,
+        "max_wait_minutes": 0
+      },
+      "http_status": 200,
+      "planner_status": "ok",
+      "journeys_returned": 1,
+      "search_truncated": false,
+      "elapsed_ms": 639.0,
+      "first_journey": {
+        "transfers": 0,
+        "departure_at": "2026-11-20T07:47:11+05:30",
+        "estimated_arrival_at": "2026-11-20T07:49:57+05:30",
+        "initial_wait_seconds": 0,
+        "transfer_wait_seconds": 0,
+        "travel_duration_seconds": 166,
+        "duration_is_approximate": true,
+        "trip_ids": [
+          "1184_FULL_07_14"
+        ],
+        "service_dates": [
+          "2026-11-20"
+        ]
+      }
+    },
+    {
+      "case": "no_direct",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "1",
+        "travel_date": "2026-11-20",
+        "departure_time": "06:09:00",
+        "limit": 3,
+        "max_transfers": 0
+      },
+      "http_status": 200,
+      "planner_status": "no_journeys",
+      "journeys_returned": 0,
+      "search_truncated": false,
+      "elapsed_ms": 519.25
+    },
+    {
+      "case": "unsupported_date",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10079",
+        "travel_date": "2024-11-20",
+        "departure_time": "06:09:00",
+        "limit": 3,
+        "max_transfers": 0
+      },
+      "http_status": 200,
+      "planner_status": "unsupported_date",
+      "journeys_returned": 0,
+      "search_truncated": false,
+      "elapsed_ms": 146.09
+    },
+    {
+      "case": "unknown_stop",
+      "http_status": 404
+    },
+    {
+      "case": "invalid_time",
+      "http_status": 422
+    },
+    {
+      "case": "calendar_window_boundary",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10079",
+        "travel_date": "2024-12-31",
+        "departure_time": "18:00",
+        "max_transfers": 0
+      },
+      "http_status": 200,
+      "date_supported": false,
+      "planner_status": "unsupported_date"
+    },
+    {
+      "case": "calendar_window_boundary",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10079",
+        "travel_date": "2024-12-31",
+        "departure_time": "23:50",
+        "max_transfers": 0
+      },
+      "http_status": 200,
+      "date_supported": true,
+      "planner_status": "no_journeys"
+    },
+    {
+      "case": "calendar_window_boundary",
+      "parameters": {
+        "source_stop_id": "8394",
+        "destination_stop_id": "10079",
+        "travel_date": "2040-01-02",
+        "departure_time": "12:00",
+        "max_transfers": 0
+      },
+      "http_status": 200,
+      "date_supported": false,
+      "planner_status": "unsupported_date"
+    }
+  ],
+  "summary": "Eight real-data journey scenarios, two invalid requests and three calendar-window boundaries passed over live HTTP."
+}
