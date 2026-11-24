@@ -11,7 +11,7 @@
 
 ## Current scope
 
-Phases 1–9 are complete. Phase 10 authorizes Model Insights and About using the original brief, existing notebook, metadata and exported evaluation reports. Preserve the evaluation denominators and recorded-load interpretation. Stop after Phase 10 and record verification in PROGRESS.md.
+Phases 1–11 are complete. Phase 11 audited the existing application against real exports and verified targeted fixes and optimizations. See PROGRESS.md for results and limitations. Stop after Phase 11.
 
 ## Layout
 

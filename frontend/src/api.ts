@@ -1,5 +1,5 @@
 export interface Stop { stop_id: string; stop_name: string }
-export interface Overview { profiles:number; routes:number; routes_with_profiles:number; classifications:Record<CrowdingLevel,number> }
+export interface Overview { stops:number; profiles:number; routes:number; routes_with_profiles:number; classifications:Record<CrowdingLevel,number> }
 export interface RouteStats {route_id:string;route_name:string;profiles:number;low_profiles:number;moderate_profiles:number;high_profiles:number;insufficient_data_profiles:number}
 export interface SlotCounts {is_weekend:boolean;time_slot:number;segment_profiles:number;high_crowding_segments:number;insufficient_data_segments:number}
 export interface Peak {day_type:'Weekday'|'Weekend';period:'Morning Peak'|'Evening Peak'|'Other Hours';segment_observations:number;average_load:number}
@@ -61,7 +61,14 @@ interface Results {
 const base = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '')
 async function get<T>(path: string, signal: AbortSignal, params?: Record<string,string>): Promise<T> {
   const query = params ? '?' + new URLSearchParams(params) : ''
-  const response = await fetch(base + path + query, {signal, headers: {Accept:'application/json'}})
+  const request = () => fetch(base + path + query, {signal, headers: {Accept:'application/json'}})
+  let response = await request()
+  // A cancelled search can briefly occupy a DuckDB slot while the server finishes it.
+  for (let retry = 0; retry < 3 && response.status === 503 && response.headers.get('Retry-After') === '1'; retry++) {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    signal.throwIfAborted()
+    response = await request()
+  }
   if (!response.ok) {
     const body = await response.json().catch(() => null)
     throw new Error(body?.error?.message || 'The transit service is unavailable.')
@@ -70,6 +77,7 @@ async function get<T>(path: string, signal: AbortSignal, params?: Record<string,
   return response.json()
 }
 export const api = {
+  health: (signal:AbortSignal) => get<{status:'ok';database:'ready';model_files:'ready'}>('/health',signal),
   stops: (text: string, signal: AbortSignal) => get<{items: Stop[]}>('/stops', signal, {search:text,limit:'6'}),
   journeys: (q: JourneyQuery, signal: AbortSignal) => get<Results>('/journeys', signal, {...q,limit:'4'}),
   overview: (signal: AbortSignal) => get<Overview>('/analytics/overview',signal),
@@ -81,4 +89,3 @@ export const api = {
   evaluation: (signal:AbortSignal)=>get<Evaluation>('/analytics/model-performance',signal),
   model: (signal: AbortSignal) => get<Model>('/model-info',signal)
 }
-

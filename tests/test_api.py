@@ -44,7 +44,10 @@ class ApiIntegrationTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.app = create_app(Settings())
+        runtime = TemporaryDirectory()
+        cls.addClassCleanup(runtime.cleanup)
+        settings = Settings(runtime_dir=Path(runtime.name))
+        cls.app = create_app(settings)
         cls.client = TestClient(cls.app, raise_server_exceptions=False)
         cls.db = cls.app.state.resources.db
         cls.phase1 = json.loads((PROJECT_ROOT / 'docs/phase1-verification.json').read_text())
@@ -282,22 +285,25 @@ class ApiIntegrationTests(unittest.TestCase):
         method = self.client.options('/api/stops', headers={'Origin': 'http://localhost:5173',
             'Access-Control-Request-Method': 'POST'})
         self.assertEqual(method.status_code, 400)
-        for kwargs in ({'cors_origins': ('*',)}, {'cors_origins': ('https://example.com',)},
+        for kwargs in ({'runtime_dir': 'CrowdRoute_Delhi_Model/temp'},
+                       {'runtime_dir': 'data/processed/spill', 'data_dir': 'alternate'},
+                       {'cors_origins': ('*',)}, {'cors_origins': ('https://example.com',)},
                        {'max_concurrent_queries': 0}):
             with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
                 Settings(**kwargs)
 
     def test_capacity_limit_and_release(self):
         slots = self.app.state.query_slots
-        for _ in range(2):
+        count = self.app.state.resources.db.settings.max_concurrent_queries
+        for _ in range(count):
             self.assertTrue(slots.acquire(blocking=False))
         try:
             response = self.client.get('/api/health')
             self.assertEqual(response.status_code, 503)
             self.assertEqual(response.headers['retry-after'], '1')
         finally:
-            slots.release()
-            slots.release()
+            for _ in range(count):
+                slots.release()
         self.get('/api/health')
 
     def test_missing_exports_are_safe_503(self):

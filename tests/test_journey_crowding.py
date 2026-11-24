@@ -4,6 +4,8 @@ from copy import deepcopy
 from datetime import date, datetime, time, timedelta
 import json
 import math
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
@@ -26,10 +28,13 @@ def clock(seconds):
 class JourneyCrowdingIntegrationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        runtime = TemporaryDirectory()
+        cls.addClassCleanup(runtime.cleanup)
+        settings = Settings(runtime_dir=Path(runtime.name))
         discovery = json.loads((PROJECT_ROOT/'docs/phase5-crowding-cases.json').read_text())
         cls.cases = discovery['cases']
         cls.old_cases = json.loads((PROJECT_ROOT/'docs/phase4-journey-cases.json').read_text())
-        cls.app = create_app(Settings())
+        cls.app = create_app(settings)
         cls.db = cls.app.state.resources.db
         cls.client = TestClient(cls.app, raise_server_exceptions=False)
         cls.cache = {}

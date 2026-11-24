@@ -1,6 +1,6 @@
 # CrowdRoute Delhi progress
 
-Updated: 21 November 2026 (Asia/Kolkata).
+Updated: 22 November 2026 (Asia/Kolkata).
 
 ## Phase 1 — complete
 
@@ -225,6 +225,34 @@ Model Insights reads model_metadata.json and the four saved evaluation and consi
 - Verified weekly and peak values against weekly_analysis.csv and peak_analysis.csv. The view reports the weekly mean range and the partial final week, and displays separate weekday and weekend peak means and sample counts.
 - Strict TypeScript checks and the production build passed. In Edge, compared rendered metadata, test scores, common-subset table rows, weekly means and peak means and observation counts with the files on disk. Verified charts, keyboard activation of the data disclosure, navigation between both pages, diagrams, all six limitations, API retry, and layouts at 390, 768 and 1440 pixels.
 
+## Phase 10 stop point (historical)
+
+Phase 10 completed Model Insights and About.
+
+## Phase 11 — Complete testing and optimization
+
+Completed on 22 November 2026. The backend suite passed all 87 tests in 60.912 seconds. Uvicorn started successfully. Live HTTP verification exercised all 15 application endpoints, Swagger, OpenAPI and local CORS. The journey verifier passed eight real-data scenarios, two invalid requests and three calendar boundaries. Fourteen further live ranking checks passed. Coverage included service dates crossing midnight, repeated stops, all four historical crowding labels, unavailable Comfortable rankings and bounded searches with no feasible journey.
+
+The final TypeScript check and Vite production build passed. In headless Edge, exercised real autocomplete, swap, direct and transfer searches, ordered stops, journey preferences, calendar and empty states, and recovery from blocked API requests. Checked dashboard charts, route search, pagination, day and slot filters, Model Insights and About. Verified theme persistence on reload and responsive layouts at 390, 768 and 1440 pixels. Map checks covered real geometry overlays from stop coordinates, attribution, popups, zoom, fitting and tile-error recovery.
+
+### Changes and measured results
+
+- Batched timetable leg-detail SQL reads across up to eight candidates, retaining service-date identity, ordered stop sequences, per-leg row caps and the existing request-local leg cache. Compared three calls per scenario before and after in separate local benchmark processes using the original exports.
+
+| Search on 20 November 2026 | Leg queries before → after | Median planner time before → after |
+| --- | --- | --- |
+| 3619 → 3621 at 08:45:23, direct only | 26 → 4 | 2.113 → 1.242 s |
+| Same stops and time, transfers enabled | 39 → 9 | 2.837 → 1.863 s |
+| 8394 → 10081 at 06:09, transfers enabled | 19 → 2 | 1.923 → 1.018 s |
+
+- Full serialized response digests matched before and after for each benchmark case. Windows peak process working set across the benchmark rose from 101.5 to 118.2 MiB. These local sequential measurements cover the planner, including enrichment and ranking. Production throughput, concurrent peak memory and tail latency remain unmeasured.
+- Dashboard table pagination previously requested routes, heatmap and High segments again. The filtered explorer now reuses its heatmap and High rows within the selected route/day/slot. Browser network inspection verified one route-table request on pagination and correct results after filter changes.
+- Fixed a missing favicon discovered in the browser console. Reproduced a Leaflet exception twice while switching maps and resizing. Its resize callback tried to fit a disposed map. Changed observer cleanup to run during layout teardown and guarded the fit against detached containers and removed panes. Edge retesting with direct and transfer journeys, repeated hide/show, zoom, fit and resize at all three widths recorded no uncaught exceptions.
+
+### Remaining limitations
+
+Browser checks used desktop Edge with emulated viewport sizes. Physical mobile devices and other browser engines remain untested. External street tiles depend on connectivity. The schedule and historical crowding limitations still apply. The existing Starlette TestClient HTTPX deprecation warning appeared during the successful backend suite.
+
 ## Current stop point
 
-Phase 10 is complete in the local production build. Further phases await authorization.
+Phase 11 is complete. Further phases await authorization.

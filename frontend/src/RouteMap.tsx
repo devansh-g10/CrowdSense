@@ -1,103 +1,118 @@
-import { useEffect, useMemo, useState } from 'react'
-import { divIcon, latLngBounds, type LatLngTuple } from 'leaflet'
-import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet'
-import { LocateFixed } from 'lucide-react'
-import { type CrowdingLevel, type Journey, type JourneyLeg } from './api'
-import 'leaflet/dist/leaflet.css'
+import {useCallback,useEffect,useMemo,useRef,useState} from 'react'
+import mapboxgl from 'mapbox-gl'
+import {roadPath} from './roadPath'
+import {useRequest,State} from './ui'
+import {LocateFixed,Map as MapIcon,Satellite} from 'lucide-react'
+import type {Journey} from './api'
+import {geometry,strokes,stopRole,symbols} from './routeGeometry'
+import {drawLayers} from './mapLayers'
+import {useVenueMap,empty} from './venueMap'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import './route-map.css'
 
-const strokes:Record<CrowdingLevel,string> = {Low:'#16834e', Moderate:'#be7908', High:'#c43c38', 'Insufficient Data':'#687585'}
-const symbols = {Source:'S',Destination:'D',Transfer:'T','Intermediate stop':'•'}
-type Role = keyof typeof symbols
-type StopEvent = JourneyLeg['stops'][number]
-interface Visit { stop:StopEvent; role:Role; route:string; leg:number }
-interface MapStop {position:LatLngTuple; visits:Visit[]}
-interface MapSegment { key:string; positions:LatLngTuple[]; from:string; to:string; route:string; evidence:JourneyLeg['segments'][number]['crowding'] }
-
-function position(stop:StopEvent):LatLngTuple|null {
-  const {latitude,longitude}=stop
-  if(!Number.isFinite(latitude)||!Number.isFinite(longitude)||Math.abs(latitude)>90||Math.abs(longitude)>180) return null
-  return [latitude,longitude]
+const styles={Satellite:'mapbox://styles/mapbox/satellite-streets-v12',Street:'mapbox://styles/mapbox/streets-v12'}
+const token=import.meta.env.VITE_MAPBOX_PUBLIC_TOKEN?.trim()
+const time=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',second:'2-digit'})
+function popupText(title:string,body:string){
+  const box=document.createElement('div'),heading=document.createElement('strong'),text=document.createElement('p')
+  heading.textContent=title;text.textContent=body;box.className='map-readout';box.append(heading,text);return box
 }
-function geometry(journey:Journey) {
-  const stops=new Map<string,MapStop>()
-  const segments:MapSegment[]=[]
-  let omitted=0
-  journey.legs.forEach((leg,legIndex)=>{
-    const route=leg.route_name || leg.route_id
-    const bySequence=new Map(leg.stops.map(s=>[s.stop_sequence,s]))
-    leg.stops.forEach((stop,index)=>{
-      const point=position(stop)
-      if(!point){omitted++;return}
-      let role:Role='Intermediate stop'
-      if(index===0) role=legIndex===0?'Source':'Transfer'
-      else if(index===leg.stops.length-1) role=legIndex===journey.legs.length-1?'Destination':'Transfer'
-      const key=point.join(',')
-      const group=stops.get(key) ?? {position:point,visits:[]}
-      group.visits.push({stop,role,route,leg:legIndex+1})
-      stops.set(key,group)
-    })
-    for(const segment of leg.segments){
-      const from=bySequence.get(segment.from_stop_sequence),to=bySequence.get(segment.to_stop_sequence)
-      if(!from||!to)continue
-      const a=position(from),b=position(to)
-      if(a&&b) segments.push({key:legIndex+'-'+from.stop_sequence,positions:[a,b],from:from.stop_name,to:to.stop_name,route,evidence:segment.crowding})
-    }
-  })
-  return {stops:[...stops.values()],segments,omitted}
-}
-function FitRoute({points}:{points:LatLngTuple[]}) {
-  const map=useMap()
+export default function RouteMap({journey}:{journey:Journey}){
+  const {stops,omitted}=useMemo(()=>geometry(journey),[journey])
+  const request=useCallback((signal:AbortSignal)=>roadPath(journey,signal),[journey])
+  const {state,retry}=useRequest(request)
+  const route=state.kind==='ready'?state.data.data:empty
+  const latestRoute=useRef(route)
+  const selectedStyle=useRef<keyof typeof styles>('Satellite')
+  const venue=useVenueMap()
+  const host=useRef<HTMLDivElement>(null),instance=useRef<mapboxgl.Map|null>(null)
+  const latest=useRef(venue.data),popup=useRef<mapboxgl.Popup|null>(null)
+  const [style,setStyle]=useState<keyof typeof styles>('Satellite'),[attempt,setAttempt]=useState(0)
+  const [imageryNotice,setImageryNotice]=useState('')
+  const [status,setStatus]=useState('Loading basemap…'),[ready,setReady]=useState<mapboxgl.Map|null>(null)
+  const bounds=useMemo(()=>{const b=new mapboxgl.LngLatBounds();stops.forEach(s=>b.extend(s.position));return b},[stops])
   useEffect(()=>{
-    const fit=()=>{map.invalidateSize({pan:false});map.fitBounds(latLngBounds(points),{padding:[30,30],maxZoom:17,animate:false})}
-    fit()
-    const observer=new ResizeObserver(fit)
-    observer.observe(map.getContainer())
-    return ()=>observer.disconnect()
-  },[map,points])
-  return null
-}
-function stopRole(visits:Visit[]):Role {
-  for(const role of ['Transfer','Source','Destination'] as const) if(visits.some(v=>v.role===role))return role
-  return 'Intermediate stop'
-}
-const icons=Object.fromEntries((Object.keys(symbols) as Role[]).map(role=>{
-  const small=role==='Intermediate stop'
-  const size=small?16:28
-  return [role,divIcon({className:'route-pin '+(small?'intermediate':role.toLowerCase()),html:symbols[role],iconSize:[size,size],iconAnchor:[size/2,size/2]})]
-}))
-const localTime=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',second:'2-digit'})
-
-export default function RouteMap({journey}:{journey:Journey}) {
-  const {stops,segments,omitted}=useMemo(()=>geometry(journey),[journey])
-  const points=useMemo(()=>stops.map(s=>s.position),[stops])
-  const [failed,setFailed]=useState(false)
-  const [attempt,setAttempt]=useState(0)
-  const [fitKey,setFitKey]=useState(0)
-  if(!points.length)return <p role="status">Stop coordinates are unavailable for this journey.</p>
-  return <section className="route-map" aria-label="Selected journey map">
-    <div className="map-heading"><div><h3>Route map</h3><p>Approximate route visualization connecting scheduled GTFS stops. Lines show historical relative crowding.</p></div>
-      <button type="button" className="edit-search" onClick={()=>setFitKey(n=>n+1)}><LocateFixed size={16}/>Fit route</button></div>
-    <MapContainer className="map-canvas" center={points[0]} zoom={14} maxZoom={19} scrollWheelZoom={false}>
-      <FitRoute key={fitKey} points={points}/>
-      <TileLayer key={attempt} url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" maxZoom={19}
-        attribution={'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'}
-        eventHandlers={{tileerror:()=>setFailed(true)}}/>
-      {segments.map(s=><Polyline key={s.key} positions={s.positions} pathOptions={{color:strokes[s.evidence.crowding_level],weight:7,opacity:0.95}}>
-        <Popup><strong>{s.from} → {s.to}</strong><p>{s.route}</p><p>Historical crowding · {s.evidence.crowding_level}<br/>{s.evidence.data_support ?? 'Missing'} data support</p></Popup>
-      </Polyline>)}
-      {stops.map(({position:point,visits})=>{
-        const role=stopRole(visits)
-        const label=role+' · '+visits[0].stop.stop_name
-        return <Marker key={point.join(',')} position={point} icon={icons[role]} title={label} alt={label} zIndexOffset={role==='Intermediate stop'?0:300}>
-          <Popup><div className="map-visits">{visits.map(v=><div key={v.leg+'-'+v.stop.stop_sequence}>
-            <strong>{v.role} · {v.stop.stop_name}</strong><p>Leg {v.leg} · {v.route}<br/>Stop #{v.stop.stop_id} · {localTime.format(new Date(v.stop.scheduled_departure_at))} IST</p></div>)}</div></Popup>
-        </Marker>
-      })}
-    </MapContainer>
-    {failed && <div className="map-status" role="status">Some street map tiles are unavailable. Stops and route segments remain visible. <button type="button" onClick={()=>{setFailed(false);setAttempt(n=>n+1)}}>Retry tiles</button></div>}
-    {omitted>0 && <p role="status">Some stops have unavailable coordinates. Only segments with both endpoints are drawn.</p>}
-    <div className="map-legend" aria-label="Historical crowding legend"><strong>Historical crowding</strong>{(Object.keys(strokes) as CrowdingLevel[]).map(level=><span key={level}><i style={{background:strokes[level]}}/>{level}</span>)}</div>
-    <div className="map-symbols">S · Source　 D · Destination　 {journey.transfers>0 && 'T · Transfer　 '}● · Intermediate stop</div>
+    latestRoute.current=route
+    instance.current?.getSource<mapboxgl.GeoJSONSource>('journey')?.setData(route)
+  },[route])
+  useEffect(()=>{
+    latest.current=venue.data
+    const map=instance.current
+    map?.getSource<mapboxgl.GeoJSONSource>('venue')?.setData(venue.data)
+    popup.current?.remove()
+  },[venue.data])
+  useEffect(()=>{
+    if(!host.current||!stops.length)return
+    setReady(null);setStatus('Loading basemap…')
+    if(!token?.startsWith('pk.')){setStatus('Configure VITE_MAPBOX_PUBLIC_TOKEN in frontend/.env.local.');return}
+    let map:mapboxgl.Map
+    try{
+      map=new mapboxgl.Map({container:host.current,accessToken:token,style:styles[selectedStyle.current],bounds,
+        fitBoundsOptions:{padding:38,maxZoom:17},cooperativeGestures:true})
+    }catch{setStatus('Map unavailable. Check WebGL 2 support and reload.');return}
+    instance.current=map
+    map.addControl(new mapboxgl.NavigationControl({visualizePitch:true}),'top-right')
+    map.addControl(new mapboxgl.FullscreenControl(),'top-right')
+    const markers=stops.map(s=>{
+      const role=stopRole(s.visits),button=document.createElement('button')
+      button.type='button';button.className='route-pin '+(role==='Intermediate stop'?'intermediate':role.toLowerCase())
+      button.textContent=symbols[role];button.setAttribute('aria-label',role+' · '+s.visits[0].stop.stop_name)
+      const content=document.createElement('div')
+      for(const v of s.visits)content.append(popupText(v.role+' · '+v.stop.stop_name,'Leg '+v.leg+' · '+v.route+' · #'+v.stop.stop_id+' · '+time.format(new Date(v.stop.scheduled_departure_at))+' IST'))
+      return new mapboxgl.Marker({element:button}).setLngLat(s.position).setPopup(new mapboxgl.Popup({maxWidth:'300px'}).setDOMContent(content)).addTo(map)
+    })
+    map.on('click',e=>{
+      const layers=['venue-points','evacuation','risk-zones','bus-route'].filter(id=>map.getLayer(id))
+      if(!layers.length)return
+      const f=map.queryRenderedFeatures(e.point,{layers}).sort((a,b)=>layers.indexOf(a.layer!.id)-layers.indexOf(b.layer!.id))[0]
+      if(!f)return
+      const p=f.properties
+      if(!p)return
+      const detail=p.kind==='zone'?p.count+' people · '+p.density+' people/m² · '+p.risk+' risk':p.detail ??
+        ({entry:'Entry gate',exit:'Exit gate',camera:'Camera location',evacuation:'Operator-approved evacuation path'} as Record<string,string>)[p.kind]
+      popup.current?.remove()
+      popup.current=new mapboxgl.Popup().setLngLat(e.lngLat).setDOMContent(popupText(p.name,detail)).addTo(map)
+    })
+    map.on('style.load',()=>{drawLayers(map,latestRoute.current,latest.current);setReady(map);setStatus(s=>s==='Loading basemap…'?'':s)})
+    let failed=false
+    map.on('styledataloading',()=>{failed=false})
+    map.on('idle',()=>{if(!failed)setStatus('')})
+    map.on('error',event=>{
+      failed=true
+      const code=(event.error as Error & {status?:number}).status
+      const url=(event.error as Error & {url?:string}).url || ''
+      if(selectedStyle.current==='Satellite' && (url.includes('/mapbox.satellite/') || ('sourceId' in event && String(event.sourceId).includes('satellite')))){
+        selectedStyle.current='Street'
+        setStyle('Street')
+        setImageryNotice(code===429?'Mapbox is rate-limiting satellite tiles (HTTP 429). Showing streets. Select Satellite to retry later.':'Satellite imagery could not load. Showing streets. Select Satellite to retry.')
+        queueMicrotask(()=>{if(instance.current===map && selectedStyle.current==='Street')map.setStyle(styles.Street,{diff:false,localFontFamily:undefined,localIdeographFontFamily:undefined})})
+        return
+      }
+      setStatus(code===401||code===403?'Mapbox denied access. Check the public token and allowed origin.':'Basemap or tiles unavailable. Check network access and retry.')
+    })
+    const timer=setTimeout(()=>setStatus(s=>s==='Loading basemap…'?'Basemap is taking longer than expected. Check the connection or retry.':s),20000)
+    const observer=new ResizeObserver(()=>map.resize());observer.observe(host.current)
+    return ()=>{clearTimeout(timer);observer.disconnect();popup.current?.remove();markers.forEach(m=>m.remove());instance.current=null;map.remove()}
+  },[bounds,stops,attempt])
+  function switchStyle(key:keyof typeof styles){
+    if(selectedStyle.current===key)return
+    setImageryNotice('')
+    selectedStyle.current=key
+    setStyle(key);setStatus('Loading basemap…')
+    instance.current?.setStyle(styles[key],{diff:false,localFontFamily:undefined,localIdeographFontFamily:undefined})
+  }
+  if(!stops.length)return <p role="status">Stop coordinates are unavailable for this journey.</p>
+  return <section className="route-map" aria-label="Selected journey map"><div className="map-heading"><div><h3>Route map</h3></div>
+    <button className="edit-search" disabled={!ready} onClick={()=>instance.current?.fitBounds(bounds,{padding:38,maxZoom:17,duration:350})}><LocateFixed size={16}/>Fit route</button></div>
+    <div className="map-switch" aria-label="Basemap">{(['Satellite','Street'] as const).map(key=><button key={key} aria-pressed={key===style} onClick={()=>switchStyle(key)}>{key==='Satellite'?<Satellite size={15}/>:<MapIcon size={15}/>}{key}</button>)}</div>
+    {state.kind==='ready'?<p className="map-status">{state.data.distance>0 && 'Road distance · '+(state.data.distance/1000).toFixed(2)+' km　'}Scheduled journey · {Math.round(journey.total_duration_seconds/60)} min</p>:state.kind==='error'?<State kind="error" retry={retry}>{state.message}</State>:<State kind="loading">Finding route through scheduled stops…</State>}
+    <div ref={host} className="map-canvas" aria-label="Interactive journey map"/>
+    {imageryNotice && <p className="map-status" role="status">{imageryNotice}</p>}
+    {status && <p className="map-status" role="status">{status} {status!=='Loading basemap…' && <button onClick={()=>setAttempt(n=>n+1)}>Retry map</button>}</p>}
+    {omitted>0 && <p className="map-status">Coordinates unavailable for {omitted} scheduled stop visits.</p>}
+    <div className="map-legend"><strong>Historical crowding</strong>{Object.entries(strokes).map(([level,color])=><span key={level}><i style={{background:color}}/>{level}</span>)}</div>
+    <p className="map-symbols">S · Source　 D · Destination　 {journey.transfers>0 && 'T · Transfer　'}● · Intermediate stop</p>
+    {Boolean(import.meta.env.VITE_VENUE_MAP_FEED) && <p className="map-status" role="status">{venue.message}</p>}
+    {venue.data!==empty && venue.data.features.length>0 && <div className="map-legend"><strong>Venue layers</strong>{[['#40bb74','Low risk'],['#edc531','Moderate risk'],['#f0524f','High risk'],['#157751','Entry'],['#9f482a','Exit'],['#6544ae','Camera'],['#19c8db','Evacuation path']].map(([color,label])=><span key={label}><i style={{background:color}}/>{label}</span>)}<span>Heat intensity · relative spatial density</span></div>}
   </section>
 }

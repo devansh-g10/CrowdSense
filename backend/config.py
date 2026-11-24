@@ -21,7 +21,7 @@ class Settings:
     threads: int = 2
     max_temp_directory_size: str = '1GB'
     max_query_rows: int = 1000
-    max_concurrent_queries: int = 2
+    max_concurrent_queries: int = 8
     cors_origins: tuple[str, ...] = (
         'http://localhost:5173', 'http://127.0.0.1:5173',
         'http://localhost:3000', 'http://127.0.0.1:3000',
@@ -38,7 +38,8 @@ class Settings:
             raise ValueError('threads must be between 1 and 32')
         if type(self.max_query_rows) is not int or not 1 <= self.max_query_rows <= 10000:
             raise ValueError('max_query_rows must be between 1 and 10000')
-        if self.runtime_dir == self.data_dir or self.data_dir in self.runtime_dir.parents:
+        protected_dirs = (self.data_dir, PROJECT_ROOT / 'CrowdRoute_Delhi_Model', PROJECT_ROOT / 'data' / 'processed')
+        if any(self.runtime_dir.is_relative_to(directory) for directory in protected_dirs):
             raise ValueError('Runtime files must be outside the immutable export directory')
         if type(self.max_concurrent_queries) is not int or not 1 <= self.max_concurrent_queries <= 8:
             raise ValueError('max_concurrent_queries must be between 1 and 8')

@@ -15,9 +15,8 @@ class Resources:
 
 
 def get_resources(request: Request):
-    # Do not block worker threads while waiting for RAM capacity.
     semaphore = request.app.state.query_slots
-    if not semaphore.acquire(blocking=False):
+    if not semaphore.acquire(blocking=True, timeout=1.0):
         raise HTTPException(503, 'Database request capacity reached; retry shortly.',
                             headers={'Retry-After': '1'})
     try:

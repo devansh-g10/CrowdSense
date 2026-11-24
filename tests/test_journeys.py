@@ -2,6 +2,7 @@
 from datetime import date, datetime, time, timedelta
 import json
 from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
 from fastapi.testclient import TestClient
@@ -24,10 +25,13 @@ def clock(seconds):
 class JourneyIntegrationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.db = Database(Settings())
+        runtime = TemporaryDirectory()
+        cls.addClassCleanup(runtime.cleanup)
+        settings = Settings(runtime_dir=Path(runtime.name))
+        cls.db = Database(settings)
         cls.planner = JourneyPlanner(cls.db)
         cls.cases = discover_cases(cls.db)
-        cls.client = TestClient(create_app(Settings()), raise_server_exceptions=False)
+        cls.client = TestClient(create_app(settings), raise_server_exceptions=False)
         cls.results = {}
 
     def plan(self, case_name='direct', *, travel_date=TRAVEL_DATE, seconds=None, **kwargs):

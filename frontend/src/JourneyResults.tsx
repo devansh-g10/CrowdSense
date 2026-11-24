@@ -22,12 +22,29 @@ function duration(seconds:number) {
 function Level({level,count}:{level:CrowdingLevel;count?:number}) {
   return <span className={'crowd-label '+colors[level]}>{level}{count!==undefined && ' · '+count}</span>
 }
+function CompareOptions({journeys}:{journeys:Journey[]}) {
+  const fastest=Math.min(...journeys.map(j=>j.total_duration_seconds))
+  return <Card className="compare-options"><h2>Compare travel time and crowding</h2>
+    
+    <ul>{journeys.map(j=>{
+      const extra=j.total_duration_seconds-fastest
+      const counts=j.crowding.classification_counts
+      return <li key={j.journey_id}><div><a href={'#option-'+encodeURIComponent(j.journey_id)}>{j.legs.map(l=>l.route_name || l.route_id).join(' → ')}</a>
+        <small>{clock.format(new Date(j.departure_at))} IST · {j.transfers===0?'Direct':'1 transfer'}</small></div>
+        <div><strong>{duration(j.total_duration_seconds)}</strong><small>{extra?'+'+duration(extra)+' vs. quickest shown':'Quickest shown'}</small></div>
+        <div className="compare-levels">{levels.filter(level=>counts[level]>0).map(level=><Level key={level} level={level} count={counts[level]}/>)}</div></li>
+    })}</ul></Card>
+}
 function Leg({leg,index}:{leg:JourneyLeg;index:number}) {
+  const outgoing = new Map(leg.segments.map(segment => [segment.from_stop_sequence, segment]))
+  const stops = new Map(leg.stops.map(stop => [stop.stop_sequence, stop]))
   return <section className="leg"><h3><BusFront size={17}/>Leg {index+1} · {leg.route_name || leg.route_id}</h3>
-    <ol className="stop-list">{leg.stops.map((stop,i)=>{
-      const evidence=leg.segments[i]?.crowding
+    <ol className="stop-list">{leg.stops.map(stop=>{
+      const segment = outgoing.get(stop.stop_sequence)
+      const nextStop = segment && stops.get(segment.to_stop_sequence)
+      const evidence = segment?.crowding
       return <li key={stop.stop_sequence}><strong>{stop.stop_name}</strong><time dateTime={stop.scheduled_departure_at}>{timestamp(stop.scheduled_departure_at)} IST</time>
-        {evidence && <div className="segment"><span>To {leg.stops[i+1].stop_name}</span><Level level={evidence.crowding_level}/>
+        {evidence && nextStop && <div className="segment"><span>To {nextStop.stop_name}</span><Level level={evidence.crowding_level}/>
         <small>{evidence.data_support ?? 'Missing'} support
         {evidence.sample_journeys!==null && ' · '+evidence.sample_journeys+' sampled journeys'}
         {evidence.observed_days!==null && ' · '+evidence.observed_days+' observed days'}</small>
@@ -36,7 +53,7 @@ function Leg({leg,index}:{leg:JourneyLeg;index:number}) {
 }
 function JourneyCard({journey:j,preferences,mapOpen,toggleMap}:{journey:Journey;preferences:Preference[];mapOpen:boolean;toggleMap:()=>void}) {
   const c=j.crowding
-  return <Card className="journey-option"><div className="route-heading"><span className="tile"><BusFront/></span><h2>{j.legs.map(l=>l.route_name || l.route_id).join(' → ')}</h2>
+  return <Card className="journey-option"><div id={'option-'+j.journey_id} tabIndex={-1} className="route-heading"><span className="tile"><BusFront/></span><h2>{j.legs.map(l=>l.route_name || l.route_id).join(' → ')}</h2>
     <div className="winner-tags">{preferences.map(p=><Badge key={p}>{p}</Badge>)}</div></div>
     <dl className="trip-facts">
       <div><dt>Scheduled departure</dt><dd>{timestamp(j.departure_at)}</dd></div>
@@ -47,8 +64,7 @@ function JourneyCard({journey:j,preferences,mapOpen,toggleMap}:{journey:Journey;
     </dl>
     <section className="evidence"><h3><Users size={17}/>Historical crowding by segment</h3>
       <div className="levels">{levels.filter(level=>c.classification_counts[level]>0).map(level=><Level key={level} level={level} count={c.classification_counts[level]}/>)}</div>
-      <p>Prediction coverage <strong>{c.predicted_segments}/{c.total_segments}</strong> segments · Reliable classifications <strong>{c.reliably_classified_segments}/{c.total_segments}</strong></p>
-      <p>Data support by segment · {Object.entries(c.data_support).filter(([,n])=>n>0).map(([level,n])=>level+' '+n).join(' · ')}</p>
+      
     </section>
     <button type="button" className="edit-search map-toggle" aria-expanded={mapOpen} onClick={toggleMap}><MapPinned size={17}/>{mapOpen?'Hide route map':'View route map'}</button>
     {mapOpen && <Suspense fallback={<State kind="loading">Loading route map…</State>}><RouteMap journey={j}/></Suspense>}
@@ -80,16 +96,17 @@ function SearchResults({query}:{query:JourneyQuery}) {
   return <div className="search-results">
     <Card className="search-summary"><div><h2>{origin.stop_name} → {destination.stop_name}</h2>
       <p><CalendarDays size={16}/>{query.travel_date}<Clock3 size={16}/>{query.departure_time} IST · {query.preference}</p></div>
-      <Link className="edit-search" to="/" state={{draft:{origin,destination,query}}}><Pencil size={16}/>Edit search</Link></Card>
+      <Link className="edit-search" to="/planner" state={{draft:{origin,destination,query}}}><Pencil size={16}/>Edit search</Link></Card>
     {state.kind==='loading' && <State kind="loading">Finding scheduled journeys…</State>}
     {state.kind==='error' && <State kind="error" retry={retry}>{state.message}</State>}
     {data && <>
       {data.status!=='ok' && <State kind="empty">{data.reason || 'No scheduled journeys found for this search.'}</State>}
       {data.unavailable_recommendations.map(r=><p className="availability" key={r.preference}><strong>{r.preference} unavailable.</strong> {r.explanation}</p>)}
       {alternatives.size>0 && <><div className="alternatives-heading"><h2>Scheduled alternatives</h2><span>{alternatives.size} shown</span></div>
-        <div className="note"><History size={18}/><p>Times are approximate and shown in IST. Crowding estimates come from historical trips. Live occupancy and seat availability are unknown.</p></div>
+        <CompareOptions journeys={[...alternatives.values()]}/>
+        
         {[...alternatives.values()].map(j=><JourneyCard key={j.journey_id} journey={j} mapOpen={mappedId===j.journey_id} toggleMap={()=>setMapSelection(mappedId===j.journey_id?null:j.journey_id)} preferences={data.recommendations.find(r=>r.journey.journey_id===j.journey_id)?.preferences ?? []}/>)}</>}
-      {(data.search.search_truncated || data.search.ranking_pool_truncated || data.search.result_limit_reached) && <p className="availability">Search or display limits apply. Additional scheduled alternatives may exist.</p>}
+      
       {data.warnings.length>0 && <details className="source-notes"><summary>Timetable and search limitations</summary><ul>{data.warnings.map(w=><li key={w}>{w}</li>)}</ul></details>}
     </>}
   </div>
@@ -97,6 +114,6 @@ function SearchResults({query}:{query:JourneyQuery}) {
 export function JourneyResults(){
   const [params]=useSearchParams()
   const query=useMemo(()=>readQuery(params),[params])
-  if(!query) return <Card><State kind="empty">Choose two stops, a date, a time and a preference to see scheduled journeys.</State><Link className="edit-search" to="/">Open Journey Planner</Link></Card>
+  if(!query) return <Card><State kind="empty">Choose two stops, a date, a time and a preference to see scheduled journeys.</State><Link className="edit-search" to="/planner">Open Journey Planner</Link></Card>
   return <SearchResults key={params.toString()} query={query}/>
 }
